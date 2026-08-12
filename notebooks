@@ -1,0 +1,20 @@
+# Exploratory Geospatial Data Analysis & Expansion Potential
+This notebook cleans regional sales data, removes GITC integrity anomalies, and plots retail store distribution[cite: 1].
+
+import pandas as pd
+import geopandas as gpd
+import matplotlib.pyplot as plt
+from shapely.geometry import Point
+
+# 1. Load sample dataset
+raw_df = pd.read_csv('../data/raw/sample_sales.csv')
+print("Raw Data Shape:", raw_df.shape)
+
+# 2. GITC Data Cleaning (Filter negative revenue & duplicates)
+clean_df = raw_df[raw_df['total_revenue'] > 0].drop_duplicates()
+print("Cleaned Data Shape:", clean_df.shape)
+
+# 3. Convert to GeoDataFrame
+geometry = [Point(xy) for xy in zip(clean_df['longitude'], clean_df['latitude'])]
+gdf = gpd.GeoDataFrame(clean_df, geometry=geometry, crs="EPSG:4326")
+gdf.head()
