@@ -25,6 +25,7 @@ The resulting location strategy provides risk-mitigated structural growth recomm
 
 ## Repository Structure
 ```text
+
 ├── data/                  # Placeholder directory for raw and processed datasets
 ├── notebooks/             # Jupyter Notebooks for EDA and spatial visualization
 ├── src/                   # Production-ready SQL scripts and Python data pipelines
